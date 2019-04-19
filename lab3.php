@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <?php
 
-if (isset($_POST['countries'])) {
-  $countries = $_POST['countries'];
-}else{
-  $countries = '';
-} //end if
-
-if (isset($_POST['steates'])) {
-  $states = $_POST['states'];
-}else{
-  $states = '';
-}///end if
-
-setcookie("countries", $_POST['countries'], time() + (36000));
-setcookie("states", $_POST['states'], time() + (36000));
-
+setcookie("cookie[countries]", "Country", time() + 7200);
+setcookie("cookie[states]", "State", time() + 7200);
 ?>
-
 
 <html lang="en">
 <head>
@@ -27,24 +13,39 @@ setcookie("states", $_POST['states'], time() + (36000));
   <title>Document</title>
 </head>
 <body>
-  <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+<?php 
+  if (isset($_POST['countries'])) {
+    $countries = $_POST['countries'];
+  }else{
+    $countries = '';
+  } //end if
+
+  if (isset($_POST['states'])) {
+    $states = $_POST['states'];
+  }else{
+    $states = '';
+  }///end if
+
+?>
+  <form name="countryState" method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>" >
   <label for="country">Country:</label>
   <select name="countries" id="country">
-    <option value="--Select--"<?php if($countries == "--Select--") echo 'select="selected"';?>>--Select--</option>
-    <option value="unitedStates"<?php if($countries == "unitedStates") echo 'select="selected"';?>>United States</option>
-    <option value="canada"<?php if($countries == "canada") echo 'select="selected"';?>>Canada</option>
-    <option value="ireland"<?php if($countries == "ireland") echo 'select="selected"';?>>Ireland</option>
-    <option value="france"<?php if($countries == "france") echo 'select="selected"';?>>France</option>
-    <option value="germany"<?php if($countries == "germany") echo 'select="selected"';?>>Germany</option>
+    <option value="--Select--"<?=($countries == "--Select--") ? ' selected':'';?>>--Select--</option>
+    <option value="unitedStates"<?=($countries == "unitedStates") ? ' selected':'';?>>United States</option>
+    <option value="canada"<?=($countries == "canada") ? ' selected':'';?>>Canada</option>
+    <option value="ireland"<?=($countries == "ireland") ? ' selected':'';?>>Ireland</option>
+    <option value="france"<?=($countries == "france") ? ' selected':'';?>>France</option>
+    <option value="germany"<?=($countries == "germany") ? ' selected':'';?>>Germany</option>
   </select>
+
   <label for="state">State:</label>
   <select name="states" id="state">
-  <option value="--Select--"<?php if($states == "--Select--") echo 'select="selected"';?>>--Select--</option>
-    <option value="washington"<?php if($states == "washington") echo 'select="selected"';?>>Washington</option>
-    <option value="onterio"<?php if($states == "onterio") echo 'select="selected"';?>>Onterio</option>
-    <option value="dublin"<?php if($states == "dublin") echo 'select="selected"';?>>Dublin</option>
-    <option value="normandy"<?php if($states == "normandy") echo 'select="selected"';?>>Normandy</option>
-    <option value="berlin"<?php if($states == "berlin") echo 'select="selected"';?>>Berlin</option>
+  <option value="--Select--"<?=($states == "--Select--") ? ' selected':'';?>>--Select--</option>
+    <option value="washington"<?=($states == "washington") ? ' selected':'';?>>Washington</option>
+    <option value="onterio"<?=($states == "onterio") ? ' selected':'';?>>Onterio</option>
+    <option value="dublin"<?=($states == "dublin") ? ' selected':'';?>>Dublin</option>
+    <option value="normandy"<?=($states == "normandy") ? ' selected':'';?>>Normandy</option>
+    <option value="berlin"<?=($states == "berlin") ? ' selected':'';?>>Berlin</option>
   </select>
   <br>
 		<input type="submit" value="Submit">
